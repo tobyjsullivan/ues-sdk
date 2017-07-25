@@ -2,7 +2,6 @@ package writer
 
 import (
     "net/url"
-    "encoding/base64"
     "net/http"
     "fmt"
     "github.com/tobyjsullivan/ues-sdk/event"
@@ -31,7 +30,7 @@ func New(conf *EventWriterConfig) (*EventWriter, error) {
 func (s *EventWriter) PutEvent(e *event.Event) error {
     previousId :=  e.PreviousEvent.String()
 
-    b64Data := base64.StdEncoding.EncodeToString(e.Data)
+    b64Data := e.Data.String()
 
     eventsEndpoint := s.svcUrl.ResolveReference(&url.URL{Path:"./events"})
     resp, err := http.PostForm(eventsEndpoint.String(), url.Values{
