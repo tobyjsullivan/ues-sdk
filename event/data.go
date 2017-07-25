@@ -4,8 +4,8 @@ import "encoding/base64"
 
 type EventData []byte
 
-func (d EventData) String() string {
-    return base64.StdEncoding.EncodeToString([]byte(d))
+func (d *EventData) String() string {
+    return base64.StdEncoding.EncodeToString([]byte(*d))
 }
 
 func ParseData(s string) (EventData, error) {
